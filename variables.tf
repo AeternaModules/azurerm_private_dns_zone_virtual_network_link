@@ -17,7 +17,7 @@ EOT
     private_dns_zone_name = string
     resource_group_name   = string
     virtual_network_id    = string
-    registration_enabled  = optional(bool, false)
+    registration_enabled  = optional(bool) # Default: false
     resolution_policy     = optional(string)
     tags                  = optional(map(string))
   }))
