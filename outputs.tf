@@ -1,3 +1,7 @@
+output "private_dns_zone_virtual_network_links_id" {
+  description = "Map of id values across all private_dns_zone_virtual_network_links, keyed the same as var.private_dns_zone_virtual_network_links"
+  value       = { for k, v in azurerm_private_dns_zone_virtual_network_link.private_dns_zone_virtual_network_links : k => v.id }
+}
 output "private_dns_zone_virtual_network_links_name" {
   description = "Map of name values across all private_dns_zone_virtual_network_links, keyed the same as var.private_dns_zone_virtual_network_links"
   value       = { for k, v in azurerm_private_dns_zone_virtual_network_link.private_dns_zone_virtual_network_links : k => v.name }
