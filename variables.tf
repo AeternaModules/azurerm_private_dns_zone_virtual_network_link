@@ -17,22 +17,17 @@ EOT
     private_dns_zone_name = string
     resource_group_name   = string
     virtual_network_id    = string
-    registration_enabled  = optional(bool) # Default: false
+    registration_enabled  = optional(bool)
     resolution_policy     = optional(string)
     tags                  = optional(map(string))
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.private_dns_zone_virtual_network_links : (
-        length(v.private_dns_zone_name) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_private_dns_zone_virtual_network_link's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
   # Review, translate into a real validation{} block above, and delete once confirmed.
+  # path: private_dns_zone_name
+  #   condition: length(value) > 0
+  #   message:   must not be empty
   # path: resource_group_name
   #   condition: length(value) <= 90
   #   message:   [from resourcegroups.ValidateName: invalid when len(value) > 90]
